@@ -7,10 +7,10 @@ create table member (
 	idmember int not null auto_increment,
 	lastname varchar(100) not null,
 	firstname varchar(100) not null,
-	mail varchar (255) not null,
+	email varchar (255) not null,
+    password varchar (255) not null,
 	phone varchar (50),
-  	statut enum('étudiant', 'adulte', 'senior') not null,
-  	mdp varchar (255) not null,
+  	status enum('étudiant', 'adulte', 'senior') not null,
 	credit int not null,
 	is_admin boolean default false,
 	primary key (idmember)
@@ -65,6 +65,6 @@ create table is_subscribe (
     foreign key (idmember) references member(idmember),
     foreign key (idsubscription) references subscription(idsubscription)
 );
-insert into member (lastname, firstname, mail, phone, statut, mdp, credit, is_admin) 
+insert into member (lastname, firstname, email, phone, status, password, credit, is_admin)
 values ('Admin', 'Super', 'admin@java.com', '000-000-0000', 'adulte', 'admin123', 0, true);
 
