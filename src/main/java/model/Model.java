@@ -31,4 +31,30 @@ public class Model {
         }
         return unMember;
     }
+
+    public static Book selectWhereBook(String title, String author) {
+        String req = "select * from book where title= '" + title + "' and author='" + author + "' ; ";
+        Book unBook = null;
+        try {
+            maConnexion.seConnecter();
+            Statement unStat = maConnexion.getMaConnexion().createStatement();
+            ResultSet desRes = unStat.executeQuery(req);
+            if (desRes.next()) {
+                unBook = new Book(
+                        desRes.getInt("idbook"),
+                        desRes.getString("title"),
+                        desRes.getString("author"),
+                        desRes.getInt("publicationYear"),
+                        desRes.getString("genre"),
+                        desRes.getBoolean("isAvailable")
+                );
+            }
+            unStat.close();
+            maConnexion.seDeconnecter();
+        } catch (SQLException exp) {
+            System.out.println("Erreur d'execution : " + req);
+        }
+        return unBook;
+    }
 }
+
